@@ -31,18 +31,12 @@ public class TestRunner {
     @SneakyThrows
     public void testCommonFiles() {
         List<String> corruptedFiles = new ArrayList<>();
-        List<String> matchedFilesFiles = new ArrayList<>();//
+        List<String> matchedFilesFiles = new ArrayList<>();
         List<String> commonFiles = getCommonFileNamesFromFolders(Paths.get(f1), Paths.get(f2));
 
         commonFiles.forEach(it -> {
-            List<StockTimestamp> jsonStockTimestamps = null;
-            List<StockTimestamp> csvStockTimestamps = null;
-            try {
-                jsonStockTimestamps = JsonReader.readFromFile(f1.concat(it.concat(json)));
-                csvStockTimestamps = CsvReader.readCsvFile(f2.concat(it.concat(csv)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            List<StockTimestamp> jsonStockTimestamps = JsonReader.readFromFile(f1.concat(it.concat(json)));
+            List<StockTimestamp> csvStockTimestamps = CsvReader.readCsvFile(f2.concat(it.concat(csv)));
 
             Comparator<StockTimestamp> comparator = Comparator.comparing(StockTimestamp::getTimestamp);
             comparator = comparator.thenComparing(StockTimestamp::getObservationDate);
@@ -50,7 +44,7 @@ public class TestRunner {
             jsonStockTimestamps.sort(comparator);
             try {
                 assertEquals(jsonStockTimestamps, csvStockTimestamps);
-                matchedFilesFiles.add(it);//
+                matchedFilesFiles.add(it);
                 logger.info(it + " files are Matched");
             } catch (AssertionError e) {
                 corruptedFiles.add(it);
