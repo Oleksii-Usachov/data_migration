@@ -1,3 +1,4 @@
+import lombok.SneakyThrows;
 import model.StockTimestamp;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.LogManager;
@@ -27,7 +28,8 @@ public class TestRunner {
     String csv = ".csv";
 
     @Test
-    public void testCommonFiles() throws Exception {
+    @SneakyThrows
+    public void testCommonFiles() {
         List<String> corruptedFiles = new ArrayList<>();
         List<String> matchedFilesFiles = new ArrayList<>();//
         List<String> commonFiles = getCommonFileNamesFromFolders(Paths.get(f1), Paths.get(f2));
@@ -61,7 +63,8 @@ public class TestRunner {
     }
 
     @Test
-    public void checkFileAccordance() throws Exception {
+    @SneakyThrows
+    public void checkFileAccordance() {
         Path path1 = Paths.get(f1);
         Path path2 = Paths.get(f2);
 

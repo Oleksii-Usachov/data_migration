@@ -1,5 +1,6 @@
 package reader;
 
+import lombok.SneakyThrows;
 import model.StockTimestamp;
 import org.apache.commons.lang3.ObjectUtils;
 import org.json.JSONObject;
@@ -13,7 +14,8 @@ import java.util.Objects;
 
 public class JsonReader {
 
-    public static List<StockTimestamp> readFromFile(String filePath) throws Exception {
+    @SneakyThrows
+    public static List<StockTimestamp> readFromFile(String filePath) {
         String fullJson = Utils.readFileContent(filePath);
         List<StockTimestamp> stockTimestampList = new ArrayList<>();
 

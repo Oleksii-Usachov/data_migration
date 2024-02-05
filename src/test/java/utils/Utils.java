@@ -1,5 +1,6 @@
 package utils;
 
+import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -29,7 +30,8 @@ public final class Utils {
         }
     }
 
-    public static String readFileContent(String filePath) throws Exception {
+    @SneakyThrows
+    public static String readFileContent(String filePath) {
         try {
             return FileUtils.readFileToString(new File(filePath), Charset.defaultCharset());
         } catch (Exception e) {
@@ -37,7 +39,8 @@ public final class Utils {
         }
     }
 
-    public static List<String> getCommonFileNamesFromFolders(Path f1, Path f2) throws Exception {
+    @SneakyThrows
+    public static List<String> getCommonFileNamesFromFolders(Path f1, Path f2) {
         List<String> f1Files = getAllFilesFromDir(f1);
         List<String> f2Files = getAllFilesFromDir(f2);
 
@@ -47,7 +50,8 @@ public final class Utils {
         return commonFileNames;
     }
 
-    public static List<String> getAllFilesFromDir(Path dir) throws Exception {
+    @SneakyThrows
+    public static List<String> getAllFilesFromDir(Path dir) {
         try (Stream<Path> stream = Files.list(dir)) {
             return stream.filter(file -> !Files.isDirectory(file))
                     .map(Path::getFileName)

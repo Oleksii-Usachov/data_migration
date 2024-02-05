@@ -1,5 +1,6 @@
 package reader;
 
+import lombok.SneakyThrows;
 import model.StockTimestamp;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -10,7 +11,8 @@ import java.util.List;
 
 public class CsvReader {
 
-    public static List<StockTimestamp> readCsvFile(String fileName) throws Exception {
+    @SneakyThrows
+    public static List<StockTimestamp> readCsvFile(String fileName) {
         List<StockTimestamp> stockTimestampList = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileName);
